@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Children's Book Showcase</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #fdf6e3;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .book-section {
+      margin: 40px auto;
+      max-width: 800px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .book-description {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    .book-cover img {
+      width: 200px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .carousel {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      overflow-x: auto;
+      margin-bottom: 20px;
+    }
+
+    .carousel img {
+      width: 150px;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .author-section {
+      margin-top: 60px;
+      padding: 30px;
+      background: #fceabb;
+      border-top: 2px solid #f39c12;
+    }
+
+    .author-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .author-bio {
+      font-size: 1em;
+      margin-bottom: 15px;
+    }
+
+    .contact-icons a {
+      margin: 0 10px;
+      font-size: 24px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .contact-icons a:hover {
+      color: #007bff;
+    }
+
+    @media (max-width: 600px) {
+      .carousel {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+
+  <!-- FontAwesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div class="book-section">
+    <div class="book-description">
+      <h2>Magic in the Garden</h2>
+      <p>A story about a young girl who discovers a secret garden full of talking animals and magical plants.</p>
+    </div>
+
+    <div class="book-cover">
+      <img src="cover1.jpg" alt="Magic in the Garden Cover">
+    </div>
+
+    <div class="carousel">
+      <img src="page1.jpg" alt="Book Page 1">
+      <img src="page2.jpg" alt="Book Page 2">
+      <img src="page3.jpg" alt="Book Page 3">
+      <img src="page4.jpg" alt="Book Page 4">
+    </div>
+  </div>
+
+  <!-- Repeat book-section block here for other books if needed -->
+
+  <div class="author-section">
+    <img src="author.jpg" alt="Author" class="author-image">
+    <div class="author-bio">
+      <h3>About the Author</h3>
+      <p>Yoel Pingle is a children's book writer who brings magical worlds to life through heartfelt stories and vivid illustrations.</p>
+    </div>
+    <div class="contact-icons">
+      <a href="https://facebook.com/yourprofile" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://m.me/yourprofile" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
+    </div>
+  </div>
+
+</body>
+</html>
