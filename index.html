@@ -1,129 +1,817 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Children's Book Showcase</title>
+  <link rel="icon" href="favicon.ico" />
+  <meta name="description" content="ספרי ילדים בעברית - תצוגה מקדימה, תמונות, ופרטי קשר עם הסופרת ציפי פינגלה">
+  <title>ציפי - ספרים</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      direction: rtl;
+      font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      background: #fdf6e3;
-      color: #333;
+      background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 25%, #1e40af 75%, #1e3a8a 100%);
+      color: #2c1810;
       margin: 0;
       padding: 0;
+      min-height: 100vh;
+      position: relative;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="paper" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><rect width="100" height="100" fill="%23f7f3e9"/><path d="M0 20h100M0 40h100M0 60h100M0 80h100" stroke="%23e5dcc3" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23paper)"/></svg>') repeat;
+      opacity: 0.15;
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 30px;
+      background: rgba(247, 243, 233, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 3px solid #d4af37;
+    }
+
+    .site-header h1 {
+      color: #1e3a8a;
+      font-size: 3em;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(212, 175, 55, 0.3);
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .site-header p {
+      font-size: 1.4em;
+      color: #8b4513;
+      font-style: italic;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 400;
     }
 
     .book-section {
-      margin: 40px auto;
+      margin: 60px auto;
       max-width: 800px;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 40px;
+      border-radius: 20px;
+      background: rgba(247, 243, 233, 0.95);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      border: 2px solid #d4af37;
+      position: relative;
+    }
+
+    .book-section.featured {
+      border: 3px solid #d4af37;
+      background: rgba(255, 248, 220, 0.98);
+      box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3), 0 0 30px rgba(212, 175, 55, 0.2);
+    }
+
+    .book-section.featured::before {
+      content: "חדש!";
+      position: absolute;
+      top: -15px;
+      right: 30px;
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+      color: white;
+      padding: 8px 25px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 1.1em;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
+      z-index: 10;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .book-section:nth-child(even) {
+      background: rgba(245, 245, 220, 0.95);
     }
 
     .book-description {
-      font-size: 1.2em;
+      font-size: 1.1em;
+      margin-bottom: 25px;
+      line-height: 1.8;
+    }
+
+    .book-description h2 {
+      color: #1e3a8a;
       margin-bottom: 20px;
+      font-size: 2.4em;
+      border-bottom: 3px solid #d4af37;
+      padding-bottom: 15px;
+      display: inline-block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .book-description p {
+      font-size: 1.1em;
+      line-height: 1.8;
+      color: #4a4a4a;
+      margin-bottom: 14px;
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 400;
+    }
+
+    .book-cover {
+      margin: 30px 0;
     }
 
     .book-cover img {
-      width: 200px;
-      border-radius: 5px;
-      margin-bottom: 20px;
+      width: 240px;
+      height: auto;
+      border-radius: 15px;
+      margin-bottom: 25px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+      border: 3px solid #d4af37;
     }
 
-    .carousel {
+    .book-cover img:hover {
+      transform: scale(1.05) rotate(1deg);
+    }
+
+    .book-price {
+      font-size: 1.35em;
+      margin: 30px 0;
+      color: #8b4513;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 600;
+      background: rgba(212, 175, 55, 0.15);
+      padding: 20px;
+      border-radius: 15px;
+      border: 2px solid #d4af37;
+    }
+
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      height: 380px;
+      margin: 30px auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      background: #f7f3e9;
+      border: 3px solid #d4af37;
+    }
+
+    .carousel-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .carousel-track img {
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+      object-fit: contain;
+      background: #f7f3e9;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.95);
+      border: 3px solid #b8860b;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .carousel-btn:hover {
+      background: #b8860b;
+      transform: translateY(-50%) scale(1.15);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+    }
+
+    .carousel-btn.prev {
+      right: 15px;
+    }
+
+    .carousel-btn.next {
+      left: 15px;
+    }
+
+    .carousel-indicators {
       display: flex;
       justify-content: center;
       gap: 10px;
-      overflow-x: auto;
-      margin-bottom: 20px;
+      margin-top: 20px;
     }
 
-    .carousel img {
-      width: 150px;
-      height: auto;
-      border-radius: 5px;
+    .indicator {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #d4af37;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 0.6;
+      border: 2px solid #b8860b;
+    }
+
+    .indicator.active {
+      background: #1e3a8a;
+      transform: scale(1.3);
+      opacity: 1;
+    }
+
+    .buy-button {
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .button-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      border: 2px solid #1e40af;
+    }
+
+    .button-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(30, 58, 138, 0.5);
+      background: linear-gradient(135deg, #3730a3 0%, #1e40af 100%);
+    }
+
+    .button-link.secondary {
+      background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+      box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+      border-color: #8b4513;
+    }
+
+    .button-link.secondary:hover {
+      background: linear-gradient(135deg, #a0522d 0%, #8b4513 100%);
+      box-shadow: 0 10px 30px rgba(139, 69, 19, 0.5);
+    }
+
+    .button-link.featured {
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+      border-color: #d4af37;
+      font-size: 1.3em;
+      padding: 20px 40px;
+      animation: pulse 2s infinite;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .button-link.featured:hover {
+      background: linear-gradient(135deg, #b8860b 0%, #daa520 100%);
+      box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6);
+      animation: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% { 
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+      }
+      50% { 
+        box-shadow: 0 12px 35px rgba(212, 175, 55, 0.7);
+      }
     }
 
     .author-section {
-      margin-top: 60px;
-      padding: 30px;
-      background: #fceabb;
-      border-top: 2px solid #f39c12;
+      margin-top: 80px;
+      padding: 50px;
+      background: rgba(247, 243, 233, 0.98);
+      border-top: 4px solid #d4af37;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      border: 3px solid #d4af37;
     }
 
     .author-image {
-      width: 120px;
-      height: 120px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 10px;
+      margin-bottom: 25px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      border: 5px solid #d4af37;
     }
 
     .author-bio {
-      font-size: 1em;
-      margin-bottom: 15px;
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.9;
+      font-family: 'Crimson Text', serif;
+      font-weight: 400;
+    }
+
+    .author-bio h3 {
+      color: #1e3a8a;
+      margin-bottom: 20px;
+      font-size: 2.2em;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-icons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
     }
 
     .contact-icons a {
-      margin: 0 10px;
-      font-size: 24px;
-      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.2);
+      font-size: 30px;
+      color: #1e3a8a;
       text-decoration: none;
+      transition: all 0.3s ease;
+      border: 3px solid #d4af37;
     }
 
     .contact-icons a:hover {
-      color: #007bff;
+      background: #d4af37;
+      color: white;
+      transform: translateY(-5px) rotate(5deg);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
     }
 
-    @media (max-width: 600px) {
-      .carousel {
+    .books-nav {
+      position: sticky;
+      top: 0;
+      background: rgba(30, 58, 138, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 20px 0;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #d4af37;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .books-nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+
+    .books-nav a {
+      padding: 12px 25px;
+      background: rgba(247, 243, 233, 0.9);
+      color: #1e3a8a;
+      text-decoration: none;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 500;
+      border: 2px solid #d4af37;
+      font-size: 1.05em;
+      letter-spacing: 0.3px;
+    }
+
+    .books-nav a:hover {
+      background: #d4af37;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+      
+      .book-section {
+        margin: 40px auto;
+        padding: 25px;
+      }
+      
+      .carousel-container {
+        height: 280px;
+        max-width: 100%;
+      }
+      
+      .carousel-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+      }
+      
+      .contact-icons {
+        gap: 20px;
+      }
+      
+      .contact-icons a {
+        width: 60px;
+        height: 60px;
+        font-size: 26px;
+      }
+
+      .books-nav ul {
+        gap: 15px;
+      }
+
+      .book-description h2 {
+        font-size: 2em;
+      }
+
+      .books-nav a {
+        padding: 10px 18px;
+        font-size: 0.95em;
+      }
+
+      .site-header h1 {
+        font-size: 2.4em;
+      }
+
+      .buy-button {
         flex-direction: column;
         align-items: center;
+      }
+
+      .button-link {
+        width: 80%;
+        justify-content: center;
       }
     }
   </style>
 
-  <!-- FontAwesome for icons -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cinzel:wght@400;500;600&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="container">
+    <div class="site-header">
+      <h1>הספרים של ציפי פינגלה</h1>
+      <h2>ציפי פינגלה - סופרת ועורכת</h2>
+      <img src="images/author.jpg" alt="ציפי פינגלה - הסופרת" class="author-image">
+      <p>אוהבת מילים - קוראת, כותבת, יוצרת.</p>
+      <p>נעזרת במילה הכתובה כדי לנשום בקלות, לחבר ולהתחבר.</p>
+      <p>ספריה: שומרת היער בהוצאת דני ספרים, </p>
+      <p>הבניין המנגן בהוצאת גוונים, </p>
+      <p>לא לפחד כלל בהוצאה עצמית, </p>
+      <p>חולצה של שקט בבקשה בהוצאת יסוד, </p>
+      <p>כל אחד הוא יהלום בהוצאת רשימו, </p>
+      <p>מצוין בהוצאת בית אל, </p>
+      <p>גם זו לטובה בהוצאת ידיעות ספרים</p>
+      <p>זכו לביקורות מתפעלות ולהערכה.</p>
+      <p>זכתה בפרסים על כתיבת סיפורים קצרים למבוגרים וכתיבת שירה.</p>
+      <p>ספרה החדש "מה עושים עם געגוע?" - ראה אור באחרונה.</p>
 
-  <div class="book-section">
-    <div class="book-description">
-      <h2>Magic in the Garden</h2>
-      <p>A story about a young girl who discovers a secret garden full of talking animals and magical plants.</p>
+    <!--  <p>ספרי ילדים --בעברית - סיפורים מהלב למשפחה</p> -->
     </div>
 
-    <div class="book-cover">
-      <img src="cover1.jpg" alt="Magic in the Garden Cover">
+    <nav class="books-nav">
+      <ul>
+        <li><a href="#book1">מה עושים עם געגוע?</a></li>
+        <li><a href="#book2">חולצה של שקט בבקשה</a></li>
+        <li><a href="#book3">לא לפחד כלל</a></li>
+      </ul>
+    </nav>
+
+    <!-- Book 1 - Featured -->
+    <div class="book-section featured" id="book1">
+      <div class="book-description">
+        <h2>?מה עושים עם געגוע</h2>
+
+        <div class="book-cover">
+          <img src="images/cover1.jpg" alt="כריכת הספר מה עושים עם געגוע">
+        </div>
+  
+        <p>מה עושה אמא לחיילים שנעדרים מהבית בסבבי לחימה ארוכים?</p>
+        <p>מה עושה סבתא לנכדים שהאבות שלהם, והדוד שלהם, לובשים מדים כבר תקופה ארוכה?</p>
+        <p>מה שהיא עושה תמיד כשהלב עולה על גדותיו - כותבת.</p>
+        <p>ועכשיו יכולים הקוראים, צעירים ובוגרים, לברר מה עושים עם געגוע.</p>
+        <p>חדש מאת הסופרת ציפי פינגלה, בליווי איורים מאת ישראל אברהם -</p>
+        <p><strong>מה עושים עם געגוע?</strong></p>
+        <p>הודפס בפונט שעוצב בהשראת כתב ידו של איתן פיש שנפל בעזה ב-4.12.23 </p>
+        <p>(נמצא במיזם אות.חיים - מיזם הנצחה בכתב ידם)</p>
+      </div>
+
+      <div class="book-price">
+        <p>💰 מחיר: 40 ₪</p>
+        <p>📱 לתשלום בביט או פייבוקס: 054-5868021</p>
+      </div>
+
+      <div class="buy-button">
+        <a href="https://wa.me/972545868021?text=אני%20רוצה%20לקנות%20את%20מה%20עושים%20עם%20געגוע" class="button-link featured">
+          <i class="fab fa-whatsapp"></i> להזמנות בווטסאפ!
+        </a>
+      </div>
+     
+      <div class="carousel-container" data-book="1">
+        <button class="carousel-btn prev" aria-label="עמוד קודם">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="carousel-track">
+          <img src="images/book1-page1.jpg" alt="עמוד 1" loading="lazy">
+          <img src="images/book1-page2.jpg" alt="עמוד 2" loading="lazy">
+          <img src="images/book1-page3.jpg" alt="עמוד 3" loading="lazy">
+          <img src="images/book1-page4.jpg" alt="עמוד 4" loading="lazy">
+        </div>
+        <button class="carousel-btn next" aria-label="עמוד הבא">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </div>
+      
+      <div class="carousel-indicators"></div>
     </div>
 
-    <div class="carousel">
-      <img src="page1.jpg" alt="Book Page 1">
-      <img src="page2.jpg" alt="Book Page 2">
-      <img src="page3.jpg" alt="Book Page 3">
-      <img src="page4.jpg" alt="Book Page 4">
+    <!-- Book 2 -->
+    <div class="book-section" id="book2">
+      <div class="book-description">
+        <h2>חולצה של שקט בבקשה</h2>
+        <div class="book-cover">
+          <img src="images/cover2.jpg" alt="כריכת הספר חולצה של שקט בבקשה">
+        </div>
+          <p>איך החולצות של דניאל מפריעות לו להתרכז?</p>
+        <p>איך אמא עוזרת לו? </p>
+        <p>ספר מתוק על ילד מתוק ועל רגעים מאתגרים</p>
+      </div>
+
+      <div class="book-price">
+        <p>💰 מחיר: 40 ₪</p>
+        <p>📱 לתשלום בביט או פייבוקס: 054-5868021</p>
+      </div>
+
+      <div class="buy-button">
+        <a href="https://wa.me/972545868021?text=אני%20רוצה%20לקנות%20את%20חולצה%20של%20שקט%20בבקשה" class="button-link">
+          <i class="fab fa-whatsapp"></i> להזמנות בווטסאפ
+        </a>
+      </div>
+     
+      <div class="carousel-container" data-book="2">
+        <button class="carousel-btn prev" aria-label="עמוד קודם">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="carousel-track">
+          <img src="images/book2-page1.jpg" alt="עמוד 1" loading="lazy">
+          <img src="images/book2-page2.jpg" alt="עמוד 2" loading="lazy">
+          <img src="images/book2-page3.jpg" alt="עמוד 3" loading="lazy">
+          <img src="images/book2-page4.jpg" alt="עמוד 4" loading="lazy">
+        </div>
+        <button class="carousel-btn next" aria-label="עמוד הבא">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </div>
+      
+      <div class="carousel-indicators"></div>
+    </div>
+
+    <!-- Book 3 -->
+    <div class="book-section" id="book3">
+      <div class="book-description">
+        <h2>לא לפחד כלל</h2>
+        <div class="book-cover">
+          <img src="images/cover3.jpg" alt="כריכת הספר לא לפחד כלל">
+        </div>
+          <p>מה יותר מרגיע מלדעת שפחד הוא נחלת כולם?</p> 
+        <p>אפילו אלוף העולם באגרוף מפחד! אפילו אבא</p>
+        <p>אבל אפשר לסלק את הפחד, וזה העיקר</p>
+      </div>
+
+      <div class="book-price">
+        <p>💰 מחיר: 40 ₪</p>
+        <p>📱 לתשלום בביט או פייבוקס: 054-5868021</p>
+      </div>
+
+      <div class="buy-button">
+        <a href="https://wa.me/972545868021?text=אני%20רוצה%20לקנות%20את%20לא%20לפחד%20כלל" class="button-link">
+          <i class="fab fa-whatsapp"></i> להזמנות בווטסאפ
+        </a>
+      </div>
+     
+      <div class="carousel-container" data-book="3">
+        <button class="carousel-btn prev" aria-label="עמוד קודם">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="carousel-track">
+          <img src="images/book3-page1.jpg" alt="עמוד 1" loading="lazy">
+          <img src="images/book3-page2.jpg" alt="עמוד 2" loading="lazy">
+          <img src="images/book3-page3.jpg" alt="עמוד 3" loading="lazy">
+        </div>
+        <button class="carousel-btn next" aria-label="עמוד הבא">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </div>
+      
+      <div class="carousel-indicators"></div>
+    </div>
+
+    <div class="author-section" id="author">
+      <h2>יצירת קשר:<h2>
+      <div class="contact-icons">
+        <a href="https://www.facebook.com/tsipi.pingle" target="_blank" aria-label="פייסבוק">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://wa.me/972545868021" target="_blank" aria-label="ווצאפ">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://m.me/tsipi.pingle" target="_blank" aria-label="מסנג'ר">
+          <i class="fab fa-facebook-messenger"></i>
+        </a>
+        <a href="mailto:tsipingle@hotmail.com" aria-label="אימייל">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
     </div>
   </div>
 
-  <!-- Repeat book-section block here for other books if needed -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize all carousels
+      const carouselContainers = document.querySelectorAll('.carousel-container');
+      
+      carouselContainers.forEach((container, containerIndex) => {
+        const track = container.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const nextBtn = container.querySelector('.carousel-btn.next');
+        const prevBtn = container.querySelector('.carousel-btn.prev');
+        const indicatorsContainer = container.nextElementSibling;
+        
+        let currentIndex = 0;
+        let autoPlayInterval;
 
-  <div class="author-section">
-    <img src="author.jpg" alt="Author" class="author-image">
-    <div class="author-bio">
-      <h3>About the Author</h3>
-      <p>Yoel Pingle is a children's book writer who brings magical worlds to life through heartfelt stories and vivid illustrations.</p>
-    </div>
-    <div class="contact-icons">
-      <a href="https://facebook.com/yourprofile" target="_blank"><i class="fab fa-facebook"></i></a>
-      <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
-      <a href="https://m.me/yourprofile" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
-    </div>
-  </div>
+        // Create indicators for this carousel
+        slides.forEach((_, index) => {
+          const indicator = document.createElement('div');
+          indicator.classList.add('indicator');
+          if (index === 0) indicator.classList.add('active');
+          indicator.addEventListener('click', () => goToSlide(index));
+          indicatorsContainer.appendChild(indicator);
+        });
 
+        const indicators = Array.from(indicatorsContainer.children);
+
+        function updateCarousel() {
+          const slideWidth = track.offsetWidth;
+          track.style.transform = `translateX(${currentIndex * slideWidth}px)`;
+          
+          // Update indicators
+          indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentIndex);
+          });
+        }
+
+        function goToSlide(index) {
+          currentIndex = index;
+          updateCarousel();
+        }
+
+        function nextSlide() {
+          currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+          updateCarousel();
+        }
+
+        function prevSlide() {
+          currentIndex = (currentIndex + 1) % slides.length;
+          updateCarousel();
+        }
+
+        // Event listeners for this carousel
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Touch/swipe support for this carousel
+        let startX = 0;
+        let endX = 0;
+
+        track.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].clientX;
+        });
+
+        track.addEventListener('touchend', (e) => {
+          endX = e.changedTouches[0].clientX;
+          const difference = startX - endX;
+          
+          if (Math.abs(difference) > 50) {
+            if (difference > 0) {
+              nextSlide();
+            } else {
+              prevSlide();
+            }
+          }
+        });
+
+        // Auto-play functions for this carousel
+        function startAutoPlay() {
+          autoPlayInterval = setInterval(nextSlide, 6000); // Slower for better reading
+        }
+        
+        function stopAutoPlay() {
+          clearInterval(autoPlayInterval);
+        }
+
+        // Start auto-play for this carousel
+        startAutoPlay();
+
+        // Pause auto-play on hover for this carousel
+        container.addEventListener('mouseenter', stopAutoPlay);
+        container.addEventListener('mouseleave', startAutoPlay);
+
+        // Recalculate on resize for this carousel
+        window.addEventListener('resize', updateCarousel);
+
+        // Initial setup for this carousel
+        updateCarousel();
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('.books-nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Global keyboard navigation (works for all carousels when focused)
+      document.addEventListener('keydown', (e) => {
+        // Only handle keyboard if no input is focused
+        if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+          return;
+        }
+        
+        // Handle navigation between books
+        if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+          e.preventDefault();
+          const currentBook = document.querySelector('.book-section:hover') || document.querySelector('.book-section');
+          const nextBook = currentBook.nextElementSibling;
+          if (nextBook && nextBook.classList.contains('book-section')) {
+            nextBook.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+          e.preventDefault();
+          const currentBook = document.querySelector('.book-section:hover') || document.querySelector('.book-section');
+          const prevBook = currentBook.previousElementSibling;
+          if (prevBook && prevBook.classList.contains('book-section')) {
+            prevBook.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>
