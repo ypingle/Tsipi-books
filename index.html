@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" href="favicon.ico" />
-  <meta name="description" content="ספרי ילדים בעברית - תצוגה מקדימה, תמונות, ופרטי קשר עם הסופרת ציפי פינגלד">
+  <meta name="description" content="ספרי ילדים בעברית - תצוגה מקדימה, תמונות, ופרטי קשר עם הסופרת ציפי פינגלה">
   <title>ציפי - ספרים</title>
   <style>
     body {
@@ -55,7 +55,7 @@
       font-size: 3em;
       margin-bottom: 15px;
       text-shadow: 2px 2px 4px rgba(212, 175, 55, 0.3);
-      font-family:'Times New Roman', Times, serif;
+      font-family:Arial, Helvetica, sans-serif;
       font-weight: 700;
       letter-spacing: 1px;
     }
@@ -64,8 +64,17 @@
       font-size: 1.4em;
       color: #8b4513;
       font-style: normal;
-      font-family:'Times New Roman', Times, serif;
+      font-family:Arial, Helvetica, sans-serif;
       font-weight: 400;
+    }
+
+    @font-face {
+      font-family: 'OHEitanFisch-Dfus';
+      src: url('fonts/OHEitanFisch-Dfus.woff2') format('woff2'),
+          url('fonts/OHEitanFisch-Dfus.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap; /* ensures text is visible while loading */
     }
 
     .book-section {
@@ -116,18 +125,18 @@
       border-bottom: 3px solid #d4af37;
       padding-bottom: 15px;
       display: inline-block;
-      font-family:'Times New Roman', Times, serif;
+      font-family:Arial, Helvetica, sans-serif;
       font-weight: 600;
       letter-spacing: 0.5px;
     }
 
-    .book-description p {
+   .book-description p {
       font-size: 1.1em;
       line-height: 1.8;
       color: #4a4a4a;
       margin-bottom: 14px;
       text-align: center;
-      font-family:'Times New Roman', Times, serif;
+      font-family:Arial, Helvetica, sans-serif;
       font-weight: 400;
     }
 
@@ -401,6 +410,74 @@
       box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
     }
 
+    /* WhatsApp Floating Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      color: white;
+      text-decoration: none;
+      z-index: 1001;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+      animation: whatsappPulse 2s infinite;
+      border: 3px solid #20ba5a;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.6);
+      animation: none;
+      color: white;
+      text-decoration: none;
+    }
+
+    .whatsapp-float:focus {
+      outline: 3px solid #d4af37;
+      outline-offset: 2px;
+    }
+
+    .whatsapp-tooltip {
+      position: absolute;
+      left: -150px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      font-family: 'Times New Roman', Times, serif;
+      direction: rtl;
+      display: none;
+    }
+
+    .whatsapp-float:hover .whatsapp-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @keyframes whatsappPulse {
+      0%, 100% { 
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+      }
+      50% { 
+        box-shadow: 0 10px 30px rgba(37, 211, 102, 0.7);
+      }
+    }
+
     /* Keyboard navigation hint */
     .keyboard-hint {
       position: fixed;
@@ -484,12 +561,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cinzel:wght@400;500;600&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="keyboard-hint">
-    שימוש במקלדת: ↑↓ עמודים | ←→ תמונות
-  </div>
 
   <!-- WhatsApp Floating Button -->
-  <a href="https://wa.me/972545868021?text=שלום,%20אני%20מעוניין%20בספרים%20של%20ציפי%20פינגלד" 
+  <a href="https://wa.me/972545868021?text=שלום,%20אני%20מעוניין%20בספרים%20של%20ציפי%20פינגלה" 
      class="whatsapp-float" 
      target="_blank" 
      aria-label="פנייה בווטסאפ">
@@ -502,17 +576,17 @@
     <!-- Book 1 - Featured -->
     <div class="book-section featured" id="book1">
       <div class="book-description">
-        <h2>מה עושים עם בעבוע</h2>
+        <h2>מה עושים עם געגוע</h2>
 
         <div class="book-cover">
-          <img src="images/cover1.jpg" alt="כריכת הספר מה עושים עם בעבוע">
+          <img src="images/cover1.jpg" alt="כריכת הספר מה עושים עם געגוע">
         </div>
 
         <p>מאות ימי מילואים במשפחתה</p>
-        <p>  שהם מאות ימי בעבועים - </p>
-        <p>הולידו אצל ציפי פינגלד ספר חדש, שגיבוריו הם נכדיה והוריהם הגיבורים.</p>
-        <p>ימי האבה כה רבים ללוחמים בעזה העלו את השאלה - </p>
-        <p>מה עושים עם בעבוע?</p>
+        <p>  שהם מאות ימי געגועים - </p>
+        <p>הולידו אצל ציפי פינגלה ספר חדש, שגיבוריו הם נכדיה והוריהם הגיבורים.</p>
+        <p>ימי דאגה כה רבים ללוחמים בעזה העלו את השאלה - </p>
+        <p>מה עושים עם געגוע?</p>
         <p>הספר עוצב בפונט בהשראת כתב היד של סרן איתן פיש שנפל בעזה</p>
         <p>(נמצא באות.חיים - מיזם בכתב יד). </p>
       </div>
@@ -535,12 +609,12 @@
       <div class="carousel-indicators"></div>
 
       <div class="book-price">
-        <p>💰 מחיר: 40 ₪</p>
-        <p>📱 ביט / פייבוקס: 054-5868021</p>
+        <p>מחיר: 40 ₪</p>
+        <p>ביט / פייבוקס: 054-5868021</p>
       </div>
 
       <div class="buy-button">
-        <a href="https://wa.me/972545868021?text=אני%20רוצה%20לקנות%20את%20מה%20עושים%20עם%20בעבוע" class="button-link featured">
+        <a href="https://wa.me/972545868021?text=אני%20רוצה%20לקנות%20את%20מה%20עושים%20עם%20געגוע" class="button-link featured">
           <i class="fab fa-whatsapp"></i> להזמנות בווטסאפ
         </a>
       </div>
@@ -548,33 +622,33 @@
     </div>
 
     <div class="site-header">
-      <h1>הספרים של ציפי פינגלד</h1>
-      <h2>ציפי פינגלד - סופרת ועורכת</h2>
-      <img src="images/author.jpg" alt="ציפי פינגלד - הסופרת" class="author-image">
+      <h1>הספרים של ציפי פינגלה</h1>
+      <h2>ציפי פינגלה - סופרת ועורכת</h2>
+      <img src="images/author.jpg" alt="ציפי פינגלה - הסופרת" class="author-image">
       <p>אוהבת מילים - קוראת, כותבת, יוצרת.</p>
       <p>נעזרת במילה הכתובה כדי לנשום בקלות, לחבר ולהתחבר.</p>
-      <p>ספרית: שומרת היער בהוצאת הני ספרים, </p>
-      <p>הבניין המנגן בהוצאת גווני, </p>
+      <p>ספרית: שומרת היער בהוצאת דני ספרים, </p>
+      <p>הבניין המנגן בהוצאת גוונים, </p>
       <p>לא לפחד כלל בהוצאה עצמית, </p>
       <p>חולצה של שקט בבקשה בהוצאת יסוד, </p>
       <p>כל אחד הוא יהלום בהוצאת רשימו, </p>
       <p>מצוין בהוצאת בית אל, </p>
-      <p>בן זוג לטובה בהוצאת יהדות ספרים</p>
+      <p>גם זו לטובה בהוצאת ידיעות ספרים</p>
       <p>זכו לביקורות מתפעלות ולהערכה.</p>
       <p>זכתה בפרסים על כתיבת סיפורים קצרים למבוגרים וכתיבת שירה.</p>
-      <p>ספרה החדש "מה עושים עם בעבוע?" - ראה אור באחרונה.</p>
+      <p>ספרה החדש "מה עושים עם געגוע?" - ראה אור באחרונה.</p>
 
     <!--  <p>ספרי ילדים --בעברית - סיפורים מהלב למשפחה</p> -->
     </div>
 
-    <nav class="books-nav">
+<!--    <nav class="books-nav">
       <ul>
-        <li><a href="#book1">מה עושים עם בעבוע</a></li>
+        <li><a href="#book1">מה עושים עם געגוע</a></li>
         <li><a href="#book2">חולצה של שקט בבקשה</a></li>
         <li><a href="#book3">לא לפחד כלל</a></li>
         <li><a href="#author">יצירת קשר</a></li>
       </ul>
-    </nav>
+    </nav>-->
 
     <!-- Book 2 -->
     <div class="book-section" id="book2">
@@ -605,8 +679,8 @@
       
       <div class="carousel-indicators"></div>
       <div class="book-price">
-        <p>💰 מחיר: 40 ₪</p>
-        <p>📱 ביט / פייבוקס: 054-5868021</p>
+        <p>מחיר: 40 ₪</p>
+        <p>ביט / פייבוקס: 054-5868021</p>
       </div>
 
       <div class="buy-button">
@@ -644,20 +718,20 @@
       
       <div class="carousel-indicators"></div>
       <div class="book-price">
-        <p>💰 מחיר: 40 ₪</p>
-        <p>📱 ביט / פייבוקס: 054-5868021</p>
+        <p>מחיר: 40 ₪</p>
+        <p>ביט / פייבוקס: 054-5868021</p>
       </div>
 
       <div class="buy-button">
         <a href="https://wa.me/972545868021?text=אני%20רוצה%20לקנות%20את%20לא%20לפחד%20כלל" class="button-link">
-          <i class="fab fa-whatsapp"></i> להזמנות בווטסאפ
+          <i class="fab fa-whatsapp"></i>להזמנות בווטסאפ
         </a>
       </div>
     </div>
 
-    <div class="author-section" id="author">
-      <h2>יצירת קשר:<h2>
-      <div class="contact-icons">
+    <!-- <div class="author-section" id="author">
+      <h2>יצירת קשר:<h2> -->
+      <div class="contact-icons"> 
         <a href="https://www.facebook.com/tsipi.pingle" target="_blank" aria-label="פייסבוק">
           <i class="fab fa-facebook"></i>
         </a>
@@ -670,8 +744,8 @@
         <a href="mailto:tsipingle@hotmail.com" aria-label="אימייל">
           <i class="fas fa-envelope"></i>
         </a>
-      </div>
-    </div>
+       </div>
+    <!-- </div> -->
   </div>
 
   <script>
