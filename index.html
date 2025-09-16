@@ -12,7 +12,7 @@
       direction: rtl;
       font-family:'Times New Roman', Times, serif;
       text-align: center;
-      background: linear-gradient(135deg, #68718a 0%, #68718a 25%, #68718a 75%, #68718a 100%);
+      background: white;
       color: #2c1810;
       margin: 0;
       padding: 0;
@@ -255,6 +255,7 @@
       margin: 30px 0;
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 15px;
       flex-wrap: wrap;
     }
@@ -370,6 +371,54 @@
       box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
     }
 
+    /* Floating WhatsApp Button */
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 35px;
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      border: 3px solid white;
+      animation: pulse-whatsapp 2s infinite;
+    }
+
+    .floating-whatsapp:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+      animation: none;
+    }
+
+    @keyframes pulse-whatsapp {
+      0%, 100% { 
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      }
+      50% { 
+        box-shadow: 0 12px 35px rgba(37, 211, 102, 0.7);
+      }
+    }
+
+    /* Mobile responsive for floating button */
+    @media (max-width: 768px) {
+      .floating-whatsapp {
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        font-size: 30px;
+      }
+    }
+
     .books-nav {
       position: sticky;
       top: 0;
@@ -470,6 +519,12 @@
         width: 80%;
         justify-content: center;
       }
+
+      .button-link.featured {
+        width: 80%;
+        justify-content: center;
+        margin: 0 auto;
+      }
     }
   </style>
 
@@ -480,8 +535,8 @@
   <div class="container">
 
     <!-- Book 1 - Featured -->
-    <div class="book-section featured" id="book1">
-      <div class="book-description">
+    <div class="book-section featured" id="book1"> 
+        <div class="book-description">
         <h2>מה עושים עם געגוע</h2>
 
         <div class="book-cover">
@@ -494,7 +549,7 @@
         <p>ימי דאגה כה רבים ללוחמים בעזה העלו את השאלה - </p>
         <p>מה עושים עם געגוע?</p>
         <p>הספר עוצב בפונט בהשראת כתב היד של סרן איתן פיש שנפל בעזה</p>
-        <p>(נמצא באות.חיים - מיזם בכתב ידם). </p>
+        <p>(נמצא באות.חיים - מיזם הנצחה בכתב ידם). </p>
       </div>
      
       <div class="carousel-container" data-book="1">
@@ -515,12 +570,12 @@
       <div class="carousel-indicators"></div>
 
       <div class="book-price">
-        <p>💰 מחיר: 40 ₪</p>
-        <p>📱 ביט / פייבוקס: 054-5868021</p>
+        <p> מחיר: 40 ₪</p>
+        <p> ביט / פייבוקס: 054-5868021</p>
       </div>
 
       <div class="buy-button">
-        <a href="https://wa.me/972545868021?text=אני%20רוצה%20לקנות%20את%20מה%20עושים%20עם%20געגוע" class="button-link featured">
+        <a href="https://wa.me/972545868021?text=אני%20רוצה%20לקנות%20את%20מה%20עושים%20עם%20געגוע" class="button-link">
           <i class="fab fa-whatsapp"></i> להזמנות בווטסאפ
         </a>
       </div>
@@ -585,8 +640,8 @@
       
       <div class="carousel-indicators"></div>
       <div class="book-price">
-        <p>💰 מחיר: 40 ₪</p>
-        <p>📱 ביט / פייבוקס: 054-5868021</p>
+        <p> מחיר: 40 ₪</p>
+        <p> ביט / פייבוקס: 054-5868021</p>
       </div>
 
       <div class="buy-button">
@@ -624,8 +679,8 @@
       
       <div class="carousel-indicators"></div>
       <div class="book-price">
-        <p>💰 מחיר: 40 ₪</p>
-        <p>📱 ביט / פייבוקס: 054-5868021</p>
+        <p> מחיר: 40 ₪</p>
+        <p> ביט / פייבוקס: 054-5868021</p>
       </div>
 
       <div class="buy-button">
@@ -653,6 +708,14 @@
       </div>
     </div>
   </div>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/972545868021?text=אני%20רוצה%20לקנות%20את%20מה%20עושים%20עם%20געגוע" 
+     class="floating-whatsapp" 
+     target="_blank" 
+     aria-label="צור קשר בווטסאפ">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -767,22 +830,49 @@
         });
       });
 
-      // Global keyboard navigation (works for all carousels when focused)
+      // Enhanced keyboard navigation
       document.addEventListener('keydown', (e) => {
         // Only handle keyboard if no input is focused
         if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
           return;
         }
         
-        // Handle navigation between books
-        if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+        // Single line movement (Arrow keys)
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          window.scrollBy({ top: 50, behavior: 'smooth' });
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          window.scrollBy({ top: -50, behavior: 'smooth' });
+        }
+        
+        // Page movement (Page Up/Down)
+        else if (e.key === 'PageDown') {
+          e.preventDefault();
+          window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' });
+        } else if (e.key === 'PageUp') {
+          e.preventDefault();
+          window.scrollBy({ top: -window.innerHeight * 0.8, behavior: 'smooth' });
+        }
+        
+        // Section navigation (Home/End keys)
+        else if (e.key === 'Home') {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+        
+        // Book section navigation (Ctrl + Arrow keys)
+        else if (e.ctrlKey && e.key === 'ArrowDown') {
           e.preventDefault();
           const currentBook = document.querySelector('.book-section:hover') || document.querySelector('.book-section');
           const nextBook = currentBook.nextElementSibling;
           if (nextBook && nextBook.classList.contains('book-section')) {
             nextBook.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
-        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        } else if (e.ctrlKey && e.key === 'ArrowUp') {
           e.preventDefault();
           const currentBook = document.querySelector('.book-section:hover') || document.querySelector('.book-section');
           const prevBook = currentBook.previousElementSibling;
